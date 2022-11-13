@@ -1,0 +1,14 @@
+<%- include('partials/header') -%>
+  <div >
+    <table>
+        <th scope="col">word</th>
+        <th scope="col">  </th>
+        <% for(var i=0; i<list.length; i++) {%>
+        <tr>
+          <td> <%= list[i] %> </td>
+        </tr>
+
+        <% } %>
+    <table>
+  </div>  
+<%- include('partials/footer') -%>

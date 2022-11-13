@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const session = require("express-session");
-const methodOverride = require("method-override");
-const flash = require("express-flash");
+// const session = require("express-session");
+// const methodOverride = require("method-override");
+// const flash = require("express-flash");
 // const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const fs = require("fs");
@@ -10,7 +10,7 @@ const fs = require("fs");
 const list =  fs.readFileSync('./dictionary.txt', 'utf8').split(/\r?\n/);
 const story = fs.readFileSync('./story.txt', 'utf8').split(" ");
 
-console.log(story);
+// console.log(story);
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -33,21 +33,14 @@ app.use(express.json());
 // app.use(logger("dev"));
 
 //Use forms for put / delete
-app.use(methodOverride("_method"));
+// app.use(methodOverride("_method"));
 
 
 //Use flash messages for errors, info, ect...
-app.use(flash());
+// app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
-
-// try {
-//   const list = fs.readFileSync('./dictionary.txt', 'utf8');
-//   console.log(data.split(/\r?\n/));
-// } catch (err) {
-//   console.error(err);
-// }
 
 
 //Server Running

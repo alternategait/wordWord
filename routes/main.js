@@ -6,9 +6,9 @@ const dictionaryController = require("../controllers/dictionary.js");
 
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex);
-// router.get("/dictionary", dictionaryController.getDictionary);
-// router.post("/dictionary", dictionaryController.postDictionary);
-// router.delete("/dictionary", dictionaryController.deleteDictionary);
+router.get("/dictionary", homeController.getDictionary);
+// router.post("/dictionary", homeController.postDictionary);
+// router.delete("/dictionary", homeController.deleteDictionary);
 // router.post("/story", storyController.postStory);
 
 
