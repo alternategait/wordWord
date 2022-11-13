@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const homeController = require("../controllers/home");
-const dictionaryController = require("../controllers/dictionary");
+const dictionaryController = require("../controllers/dictionary.js");
 const storyController = require ("../controllers/story");
 
 //Main Routes - simplified for now
