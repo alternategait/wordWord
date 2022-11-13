@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 const homeController = require("../controllers/home");
 const dictionaryController = require("../controllers/dictionary.js");
-const storyController = require ("../controllers/story");
+// const storyController = require ("../controllers/story");
 
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex);
-router.get("/dictionary", dictionaryController.getDictionary);
-router.post("/dictionary", dictionaryController.postDictionary);
-router.delete("/dictionary", dictionaryController.deleteDictionary);
-router.post("/story", storyController.postStory);
+// router.get("/dictionary", dictionaryController.getDictionary);
+// router.post("/dictionary", dictionaryController.postDictionary);
+// router.delete("/dictionary", dictionaryController.deleteDictionary);
+// router.post("/story", storyController.postStory);
 
 
 

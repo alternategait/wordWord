@@ -1,6 +1,9 @@
-module.exports = {
-    Dictionary: (req, res) => {
-        const words = Dictionary.list
-        res.render("dictionary.ejs", {words : words} );
-    },
-}
+// const low = require("lowdb");
+// const FileSync = require("lowdb/adapters/FileSync");
+// const adapter = new FileSync("db.json");
+// const db = low(adapter);
+
+
+// module.exports  = {
+//         list : ["mine", "yours"],
+//     }

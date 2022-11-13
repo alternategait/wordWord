@@ -7,8 +7,12 @@
     </form>
 
     <a href="/dictionary"> See dictionary</a>
-
+    <ul>
+        <% for(var i=0; i<activities.length; i++) {%>
+            <li> <%= words[i]%></li>
+    </ul>
 </main>
+
     
 
 <%- include('partials/footer') -%>
