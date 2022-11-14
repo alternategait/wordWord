@@ -1,7 +1,13 @@
 <%- include('partials/header') -%>
 
 <main >
-    <a href = "/story"> Evaluate story</a>
+    <table>
+        <form action="/story" method="post">
+            <tr><td><label for "story">New Story</label></td></tr>
+            <tr><td><textarea rows="5" cols="50" type ="text" id="story" name="story"> </textarea></td></tr>
+            <tr><td><button type ="submit">evaluate story</button></td></tr>
+        </form>
+    </table>
 
     <a href="/dictionary"> See dictionary</a>
 

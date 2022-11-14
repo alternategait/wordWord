@@ -9,7 +9,7 @@ router.get("/dictionary", homeController.getDictionary);
 router.post("/dictionary", homeController.postDictionary);
 router.delete("/dictionary", homeController.deleteDictionary);
 // router.get("/story", homeController.getStory);
-// router.post("/story", storyController.postStory);
+router.post("/story", homeController.postStory);
 
 
 

@@ -46,4 +46,16 @@ module.exports = {
     }
     res.redirect("/dictionary");
   },
+
+  postStory:(req, res) =>{
+    console.log(list)
+    let story = req.body.story
+    let storyArray = story.toLowerCase().split(" ");
+    let unmachedWords = []
+    storyArray.forEach(el => {if(list.indexOf(el) == -1){ unmachedWords.push(el)};});
+    // let cleanedEntities = storyArray.forEach(
+    console.log(storyArray, unmachedWords)
+    res.render("./story.ejs")
+  },
+
 };
