@@ -54,8 +54,6 @@ module.exports = {
     let notListWords = [];
     let unpuncuateNotListWords = [];
     storyArray.forEach(el => {if(list.indexOf(el) == -1){ notListWords.push(el)};});
-    // let cleanedEntities = storyArray.forEach(
-    // console.log(storyArray, unmachedWords)
     function punctuationFilter(unmatchedEntry){
       let i = 0;
       let dotFilter = [];
@@ -121,9 +119,7 @@ module.exports = {
           unpuncuateNotListWords.push(el)
         };
       });
-          console.log(unmatchedEntry, atTheEnd, unpuncuateNotListWords);
     };
-
     punctuationFilter(notListWords);
 
 
