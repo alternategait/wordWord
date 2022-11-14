@@ -7,7 +7,8 @@ const homeController = require("../controllers/home");
 router.get("/", homeController.getIndex);
 router.get("/dictionary", homeController.getDictionary);
 router.post("/dictionary", homeController.postDictionary);
-router.post("/dictionary/delete", homeController.deleteDictionary);
+router.delete("/dictionary", homeController.deleteDictionary);
+// router.get("/story", homeController.getStory);
 // router.post("/story", storyController.postStory);
 
 

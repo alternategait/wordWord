@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 // const session = require("express-session");
-// const methodOverride = require("method-override");
+const methodOverride = require("method-override");
 // const flash = require("express-flash");
 // const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
@@ -33,7 +33,7 @@ app.use(express.json());
 // app.use(logger("dev"));
 
 //Use forms for put / delete
-// app.use(methodOverride("_method"));
+app.use(methodOverride("_method"));
 
 
 //Use flash messages for errors, info, ect...
