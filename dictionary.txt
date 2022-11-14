@@ -1,6 +1,7 @@
 179 383 388 395 
 20
 a
+abs
 and
 apple
 are
@@ -18,6 +19,7 @@ company
 consistently
 conversations
 culture
+dictionary
 drive
 entrepreneurial
 equity
