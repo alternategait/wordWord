@@ -1,4 +1,6 @@
 const fs = require("fs");
+const levenshtein = require('js-levenshtein');
+
 var list =  fs.readFileSync('./dictionary.txt', 'utf8').split(/\r?\n/);
 module.exports = {
   getIndex: (req, res) => {
@@ -49,29 +51,42 @@ module.exports = {
 
   postStory:(req, res) =>{
     let story = req.body.story;
-    let storyArray = story.toLowerCase().split(" ");
-    let unmachedWords = [];
+    let storyArray = story
+        .replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g,"")
+        .toLowerCase()
+        .split(" ");
+    // let unmachedWords = {};
     let notListWords = [];
-    let unpuncuateNotListWords = [];
+    let unmachedKey = [];
+    let unmachedValue = [];
 
-    storyArray.forEach(el => {if(list.indexOf(el) == -1){ notListWords.push(el)};});
-    
-    function punctuationFilter(unmatchedEntry){
-      let stripPunctuation = notListWords.map(el => el.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g,""));
-      stripPunctuation.forEach(el => {
-        if(list.indexOf(el) == -1){ 
-          unpuncuateNotListWords.push(el)};
-        })
-        
-    };
+    storyArray.forEach(el => {
+      if(list.indexOf(el) === -1){ 
+        notListWords.push(el)
+      };
+    });
 
-    punctuationFilter(notListWords);
+    notListWords.forEach(el => {
+      let tempNotListWord = [];
+      let tempSuggestWord = [];
+      let currentLnum = 100;
+      let currentWord = " ";
+      list.forEach(dictWord =>   { 
+        if ( (num = levenshtein(el, dictWord) )  < currentLnum){ 
+          currentLnum = num; 
+          currentWord = dictWord
+        } 
+      })
+      unmachedKey.push(el) ;
+      unmachedValue.push(currentWord)
+      // console.log(tempNotListWord, tempSuggestWord)
+    })
+  // console.log(unmachedKey, unmachedValue)
 
-
+let unmachedWords = Object.assign(...unmachedKey.map((k, i) => ({[k]: unmachedValue[i]})))
+console.log(unmachedWords);
 
     res.render("./story.ejs")
   },
 
 };
-
-
