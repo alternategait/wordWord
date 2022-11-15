@@ -1,13 +1,30 @@
 <%- include('partials/header') -%>
   <div >
-    <form action="/dictionary" method="post" >
-        <input type = "text" id = "word" name = "word" >
-        <button type = "submit" >add a word</button>
-    </form>
-    <form action="/dictionary?_method=DELETE" method="post" >
-        <input type = "text" id = "word" name = "word" >
-        <button type = "submit" >delete a word</button>
-    </form>
+    <table>
+      <tr>
+        <form action="/dictionary" method="post" >
+          <td>
+            <input type = "text" id = "word" name = "word" >
+          </td>
+          <td>
+            <button type = "submit" >add a word</button>
+          </td>
+        </form>
+        <td>
+          <a href="/">return home</a>
+        </td>
+      </tr>
+      <tr>
+        <form action="/dictionary?_method=DELETE" method="post" >
+          <td>
+            <input type = "text" id = "word" name = "word" >
+          </td>
+          <td>
+            <button type = "submit" >delete a word</button>
+          </td>
+        </form>
+      </tr>
+    </table>
     <table>
         <th scope="col">word</th>
         <th scope="col">  </th>
