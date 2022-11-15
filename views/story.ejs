@@ -12,7 +12,17 @@
       <th scope="col">unmatched words</th>
       <th scope="col">closest dictionary match</th>
     </tr>
+  <%  Object.keys(unmachedWords).forEach(function (key) { %>
+    <tr>
+      <td> <%= key %> </td>
+      <td> <%= unmachedWords[key] %> </td>
+    </tr>
+  <% }) %>
+
   </table>
 </div>
 
+<a href="/">return home</a>
+<a href="/dictionary"> see dictionary </a>
 <%- include('partials/footer') -%>
+

@@ -1,7 +1,9 @@
 const fs = require("fs");
+// for comparison math
 const levenshtein = require('js-levenshtein');
-
 var list =  fs.readFileSync('./dictionary.txt', 'utf8').split(/\r?\n/);
+
+
 module.exports = {
   getIndex: (req, res) => {
     res.render("index.ejs");
@@ -14,6 +16,7 @@ module.exports = {
   postDictionary: (req, res) =>{
     list.push(req.body.word);
     let i = 0;
+    //compare for duplicates
     while (i < list.length-1){
       if (list[i] == req.body.word){
         list.pop();
@@ -22,6 +25,7 @@ module.exports = {
       } else{
         i++
       }}
+    // prepare for rewritind dictionary.txt
     list.sort()
     let txtList = list.join("\n");
     fs.writeFile('./dictionary.txt', txtList, err => {
@@ -33,12 +37,13 @@ module.exports = {
   },
 
   deleteDictionary:(req, res) =>{
+      //check word is in list
     let deletePosition = list.indexOf(req.body.word)
-    console.log(deletePosition)
     if (deletePosition === -1){
       console.error("Entry not found")
     }else{
       list.splice(deletePosition, 1)
+      // prepare for rewriting dictionary.txt
       let txtList = list.join("\n");
       fs.writeFile('./dictionary.txt', txtList, err => {
         if (err) {
@@ -50,26 +55,26 @@ module.exports = {
   },
 
   postStory:(req, res) =>{
-    let story = req.body.story;
+    const story = req.body.story;
+      //convert story to array without punctuation
     let storyArray = story
-        .replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g,"")
+        .replace(/['!"#$%&\\'()\*+,.\/:;<=>?@\[\\\]\^_`{|}~']/g,"")
         .toLowerCase()
         .split(" ");
-    // let unmachedWords = {};
     let notListWords = [];
     let unmachedKey = [];
     let unmachedValue = [];
 
+      //check if word is in dictionary list
     storyArray.forEach(el => {
       if(list.indexOf(el) === -1){ 
         notListWords.push(el)
       };
     });
-
+      //determine "closest match"
     notListWords.forEach(el => {
-      let tempNotListWord = [];
-      let tempSuggestWord = [];
-      let currentLnum = 100;
+        //46 chosen because longest word in English is 46 letters long, anything else would be smaller
+      let currentLnum = 46;
       let currentWord = " ";
       list.forEach(dictWord =>   { 
         if ( (num = levenshtein(el, dictWord) )  < currentLnum){ 
@@ -79,14 +84,12 @@ module.exports = {
       })
       unmachedKey.push(el) ;
       unmachedValue.push(currentWord)
-      // console.log(tempNotListWord, tempSuggestWord)
     })
-  // console.log(unmachedKey, unmachedValue)
 
-let unmachedWords = Object.assign(...unmachedKey.map((k, i) => ({[k]: unmachedValue[i]})))
-console.log(unmachedWords);
+      //build keyvalue pairs
+    let unmachedWords = Object.assign(...unmachedKey.map((k, i) => ({[k]: unmachedValue[i]})))
 
-    res.render("./story.ejs")
+    res.render("./story.ejs", { unmachedWords : unmachedWords})
   },
 
 };
