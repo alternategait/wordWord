@@ -54,42 +54,47 @@ module.exports = {
     res.redirect("/dictionary");
   },
 
-  postStory:(req, res) =>{
-    const story = req.body.story;
-      //convert story to array without punctuation
-    let storyArray = story
-        .replace(/['!"#$%&\\'()\*+,.\/:;<=>?@\[\\\]\^_`{|}~']/g,"")
-        .toLowerCase()
-        .split(" ");
-    let notListWords = [];
-    let unmachedKey = [];
-    let unmachedValue = [];
+  postStory:async (req, res) =>{
+    try{
+      const story = req.body.story;
+        //convert story to array without punctuation
+      let storyArray = story
+          .replace(/['!"#$%&\\'()\*+,.\/:;<=>?@\[\\\]\^_`{|}~']/g,"")
+          .toLowerCase()
+          .split(" ");
+      let notListWords = [];
+      let unmachedKey = [];
+      let unmachedValue = [];
 
-      //check if word is in dictionary list
-    storyArray.forEach(el => {
-      if(list.indexOf(el) === -1){ 
-        notListWords.push(el)
-      };
-    });
-      //determine "closest match"
-    notListWords.forEach(el => {
-        //46 chosen because longest word in English is 46 letters long, anything else would be smaller
-      let currentLnum = 46;
-      let currentWord = " ";
-      list.forEach(dictWord =>   { 
-        if ( (num = levenshtein(el, dictWord) )  < currentLnum){ 
-          currentLnum = num; 
-          currentWord = dictWord
-        } 
+        //check if word is in dictionary list
+      storyArray.forEach(el => {
+        if(list.indexOf(el) === -1){ 
+          notListWords.push(el)
+        };
+      });
+        //determine "closest match"
+      notListWords.forEach(el => {
+          //46 chosen because longest word in English is 46 letters long, anything else would be smaller
+        let currentLnum = 46;
+        let currentWord = " ";
+        list.forEach(dictWord =>   { 
+          if ( (num = levenshtein(el, dictWord) )  < currentLnum){ 
+            currentLnum = num; 
+            currentWord = dictWord
+          } 
+        })
+        unmachedKey.push(el) ;
+        unmachedValue.push(currentWord)
       })
-      unmachedKey.push(el) ;
-      unmachedValue.push(currentWord)
-    })
 
-      //build keyvalue pairs
-    let unmachedWords = Object.assign(...unmachedKey.map((k, i) => ({[k]: unmachedValue[i]})))
+        //build keyvalue pairs
+      let unmachedWords = Object.assign(...unmachedKey.map((k, i) => ({[k]: unmachedValue[i]})))
 
-    res.render("./story.ejs", { unmachedWords : unmachedWords})
+      res.render("./story.ejs", { unmachedWords : unmachedWords})
+    } catch(err){
+    console.error(error)
+    }
   },
+
 
 };

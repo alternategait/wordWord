@@ -8,6 +8,5 @@ router.get("/dictionary", homeController.getDictionary);
 router.post("/dictionary", homeController.postDictionary);
 router.delete("/dictionary", homeController.deleteDictionary);
 router.post("/story", homeController.postStory);
-
 module.exports = router;
 
