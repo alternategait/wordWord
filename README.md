@@ -16,4 +16,4 @@ npm install
 
 Create a `.env` file and add the following as `key: value`
 
-PORT: 8080 (can be any port example)
+PORT: 8080 (can be any port you choose)
