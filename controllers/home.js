@@ -54,8 +54,7 @@ module.exports = {
     res.redirect("/dictionary");
   },
 
-  postStory:async (req, res) =>{
-    try{
+  postStory: (req, res) =>{
       const story = req.body.story;
         //convert story to array without punctuation
       let storyArray = story
@@ -91,9 +90,7 @@ module.exports = {
       let unmachedWords = Object.assign(...unmachedKey.map((k, i) => ({[k]: unmachedValue[i]})))
 
       res.render("./story.ejs", { unmachedWords : unmachedWords})
-    } catch(err){
-    console.error(error)
-    }
+    
   },
 
 
