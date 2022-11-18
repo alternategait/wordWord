@@ -26,14 +26,23 @@
       </tr>
     </table>
     <table>
-        <th scope="col">word</th>
-        <th scope="col">  </th>
-        <% for(var i=0; i<list.length; i++) {%>
-        <tr>
-          <td> <%= list[i] %> </td>
-        </tr>
+        <th scope="col">words</th>
 
-        <% } %>
+        <tr>
+          <% for(var i=0; i<list.length; i++) {%>
+            <% if (i % 12 === 0) {%>
+              </tr> 
+              <tr>
+                <td> <%= list[i] %> </td>
+
+            <% } else { %>
+              <!-- </tr> 
+              <tr>  -->
+                  <td> <%= list[i] %> </td>
+            <% } %>
+
+          <% } %>
+        </tr>
     <table>
   </div>  
 <%- include('partials/footer') -%>
