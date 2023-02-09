@@ -4,6 +4,8 @@ const levenshtein = require('js-levenshtein');
 var list =  fs.readFileSync('./dictionary.txt', 'utf8').split(/\r?\n/);
 
 
+
+
 module.exports = {
   getIndex: (req, res) => {
     res.render("index.ejs");
